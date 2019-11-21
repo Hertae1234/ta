@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Pengajuan extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,19 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		// Memanggil file test.blade.php
+		// Tidak perlu menuliskan .blade.php
+		return view('dosens/pengajuan');
+	}
+	public function status()
+	{
+		// Memanggil file test.blade.php
+		// Tidak perlu menuliskan .blade.php
+		return view('dosens/status');
+	}
+
+	public function detail_pengajuan()
+	{
+		return view('layouts/detail_pengajuan');
 	}
 }
