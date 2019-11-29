@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light container">
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <div class="container">  
     <a class="navbar-brand" href="/TA">TTD</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +21,7 @@
           <a class="dropdown-item" href="#">Detail</a>
           <a class="dropdown-item" href="#">Logout</a>
         </div>
-
-   </div>
+    </div>    
+  </div>
 
 </nav>

@@ -13,54 +13,28 @@
       <th>Judul</th>
       <th>Tujuan</th>
       <th>Sumber Dana</th>
-      <th>Tanggal</th>
+      <th>Total</th>
       <th>Status</th>
       <th></th>
   </thead>
 
   <tbody> 
+    <?php $i =1; ?>
+    @foreach($pengajuan as $p)
     <tr>
-      <td>1</td>
-      <td>Ardian</td>
-      <td>Penelitian ... </td>
-      <td>Dekan</td>
-      <td>Internal</td>
-      <td>10-10-19</td>
-      <td><span class="badge badge-pill badge-success">selesai</span></td>
+      <td><?php echo $i; ?></td>
+      <td>{{ $p->name}}</td>
+      <td>{{ $p->judul}} </td>
+      <td>{{ $p->tujuan}}</td>
+      <td>{{ $p->sumber_dana}}</td>
+      <td>{{ $p->total}}</td>
+      <td><span class="badge badge-pill badge-secondary">{{ $p->status}}</span></td>
       <td>
-        <div class="dropdown show">
-          <a class="btn btn-sm btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Aksi
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/TA/admin/pengajuan">detail</a>
-            <a class="dropdown-item" href="#">unggah scan</a>
-          </div>
-        </div>
+        <a href="{{site_url('admin/pengajuan/'.$p->id)}}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Detail</a>
       </td>
     </tr>
-
-        <tr>
-      <td>2</td>
-      <td>Burdian</td>
-      <td>Penelitian ... </td>
-      <td>Dekan</td>
-      <td>Eksternal</td>
-      <td>10-11-19</td>
-      <td><span class="badge badge-pill badge-primary">dalam proses</span></td>
-      <td>
-        <div class="dropdown show">
-          <a class="btn btn-sm btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Aksi
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">detail</a>
-            <a class="dropdown-item" href="#">unggah scan</a>
-          </div>
-        </div>
-      </td>
-    </tr>
-
+    <?php $i++; ?>
+    @endforeach
   </tbody>    
 
 </table>
