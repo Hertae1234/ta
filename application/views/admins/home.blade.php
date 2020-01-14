@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('content')
+{!!$message!!}
+
 <div class="col-md-12">
 <h4>Daftar Pengajuan</h4>
 <div class="table-responsive">
@@ -21,6 +23,7 @@
   <tbody> 
     <?php $i =1; ?>
     @foreach($pengajuan as $p)
+    @if($p->status != "draf")
     <tr>
       <td><?php echo $i; ?></td>
       <td>{{ $p->name}}</td>
@@ -28,12 +31,21 @@
       <td>{{ $p->tujuan}}</td>
       <td>{{ $p->sumber_dana}}</td>
       <td>{{ $p->total}}</td>
-      <td><span class="badge badge-pill badge-secondary">{{ $p->status}}</span></td>
       <td>
-        <a href="{{site_url('admin/pengajuan/'.$p->id)}}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Detail</a>
+          <a href="{{site_url('admin/pengajuan/'.$p->id)}}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Detail</a>
+          @if($p->status == "ditolak")
+          <span class="badge badge-pill badge-danger">Ditolak</span>
+          @elseif($p->status == "diproses")
+          <span class="badge badge-pill badge-info">Diproses</span>
+          @elseif($p->status == "selesai")
+          <span class="badge badge-pill badge-success">Selesai</span>
+          @else
+          <span class="badge badge-pill badge-primary">Diajukan</span>
+          @endif
       </td>
     </tr>
     <?php $i++; ?>
+    @endif
     @endforeach
   </tbody>    
 

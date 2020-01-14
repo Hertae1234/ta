@@ -7,6 +7,13 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->model("pengajuan_model");
         $this->load->model("anggota_model");
+        $this->load->library('session');
+        $this->session->set_userdata('userame', 'admin');
+
+		if($this->session->userdata('status') != "login")
+		{
+			redirect(base_url("login"));
+		}
     }
 
 	public function index()
@@ -27,27 +34,73 @@ class Admin extends CI_Controller {
 		return view('admins/detail', $data);
 	}
 
-	public function coba()
+
+	public function update()
 	{
-		return view('admins/coba_upload');
+		$id_pengajuan		= $this->input->post('id');
+		$status				= $this->input->post('status'); 
+		$catatan 			= $this->input->post('catatan'); 
+		$tanggal_selesai	= $this->input->post('tanggal_selesai'); 
+
+		$data = [
+			'catatan'			=> $catatan
+		];
+		
+		if (!empty($tanggal_selesai)) {
+			$data['tanggal_selesai'] = $tanggal_selesai;
+		}
+		if (!empty($status)) {
+			$data['status'] = $status;
+		}
+
+
+		if (!empty($_FILES['bukti_scan']['name'])) {
+			$config['upload_path']          = APPPATH.'../upload/';
+            $config['allowed_types']        = 'jpg|png|pdf';
+            $config['file_ext_tolower']     = TRUE;
+            $config['encrypt_name']        	= TRUE;
+            $config['max_size']        		= 2048;
+            
+            $this->load->library('upload', $config);
+
+            if ( ! $this->upload->do_upload('bukti_scan'))
+            {
+                    $error = $this->upload->display_errors();
+
+					$this->session->set_flashdata('msg_error', $error);
+                    redirect('admin/pengajuan/'.$id_pengajuan);
+            }else{ 
+            	$name = $this->upload->data('file_name');
+            	$data['bukti_scan'] = $name;
+            }
+		}
+
+		$save = $this->pengajuan_model->update($data, $id_pengajuan);
+		if ($save) {
+			$this->session->set_flashdata('msg_success', 'Berhasil disimpan');
+		} else {
+			$this->session->set_flashdata('msg_error', 'Gagal dismpan, silakan coba lagi');
+		}
+
+		redirect('admin');
 	}
 
 
-    public function do_upload()
+	public function do_upload()
     {
-            $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 100;
-            $config['max_width']            = 1024;
-            $config['max_height']           = 768;
-
+            $config['upload_path']          = APPPATH.'../upload/';
+            $config['allowed_types']        = 'jpg|png|pdf';
+            $config['file_ext_tolower']     = TRUE;
+            $config['encrypt_name']        	= TRUE;
+            $config['max_size']        		= 2048;
+            
             $this->load->library('upload', $config);
 
-            if ( ! $this->upload->do_upload('userfile'))
+            if ( ! $this->upload->do_upload('bukti_scan'))
             {
                     $error = array('error' => $this->upload->display_errors());
 
-                    $this->load->view('upload_form', $error);
+                    $this->load->view('pengajuan/detail', $error);
             }
             else
             {
@@ -56,6 +109,5 @@ class Admin extends CI_Controller {
                     $this->load->view('upload_success', $data);
             }
     }
-
 
 } 

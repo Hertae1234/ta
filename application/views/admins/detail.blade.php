@@ -1,8 +1,9 @@
 @extends('layouts.master')
 @section('content')
+{!!$message!!}
 
 <div class="card border-light mb-3";>
-  <div class="card-header">Detail Pengajuan</div>
+  <div class="card-header">Detail PengajuanA</div>
   <div class="card-body">
     
     <!-- form detail pengajuan -->
@@ -49,42 +50,64 @@
 
     <!-- FORM EDIT DETAIL -->
     <table class="table">
-      <form action="admin">
+      <form action="{{site_url('admin/update ')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
+        <input type="hidden" name="id" value="{{$pengajuan->id}}"> <!-- id akan dipakai untuk memilih data mana yang akan di update -->
         <tr>
           <div class="form-group">
-              <th scope="row" width="200">Ubah Status</th>
+              <th scope="row" width="200">Status</th>
               <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                  <label class="form-check-label" for="exampleRadios1">
-                    Dalam Proses
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                  <label class="form-check-label" for="exampleRadios2">
-                    Selesai
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                  <label class="form-check-label" for="exampleRadios2">
-                    Ditolak
-                  </label>
+                <div class="form-group col-md-4">
+
+                  @if($pengajuan->status=='diajukan')
+                    <span class="badge badge-primary"><label for="status">Diajukan</label></span>
+                  @elseif($pengajuan->status=='diproses')
+                    <span class="badge badge-info"><label for="status">Diproses</label></span>
+                  @elseif($pengajuan->status=='selesai')
+                    <span class="badge badge-success"><label for="status">Selesai</label></span>
+                  @else
+                    <span class="badge badge-danger"><label for="status">Ditolak</label></span>
+                  @endif
+                  @if($pengajuan->status!='selesai' && $pengajuan->status!='ditolak' )
+                  <select class="form-control" name="status" id="status"> <!-- 'name' di sini mengikuri database -->
+                    <!-- value di sini mengikuti enum pada database -->
+                    <option>Ubah Status</option>
+                    <option value="diproses">diproses</option>
+                    <option value="ditolak">ditolak</option>
+                    <option value="selesai">selesai</option>
+                  </select>
+                  @endif
                 </div>
               </td>
-          </div>  
+          </div>
         </tr>
+        @if($pengajuan->status!='ditolak' && $pengajuan->status!='selesai')
+        <tr>
+          <th scope="row">Waktu Selesai (perkiraan) </th>
+          <td>
+            <input type="date" name="tanggal_selesai" min="1979-12-31" max="2079-12-31" value="{{$pengajuan->tanggal_selesai}}"><br>
+          </td>
+        </tr>
+        @endif
+        <tr>
+          <th scope="row">Catatan </th>
+          <td>
+            <input class="form-control" id="catatan" name="catatan" value="{{$pengajuan->catatan}}">
+          </td>
+        </tr>
+        @if($pengajuan->status != 'selesai')
         <tr>
           <th scope="row">File Scan </th>
           <td>
-            <input type="file" name="berkas" />
+            <input type="file" name="bukti_scan"/>
           </td>
         </tr>
+        @endif
         <tr>
-          <td></td>
           <td>
-            <input class="btn btn-primary" type="submit" value="Simpan">
+            <input class="btn btn-primary" type="submit" name="Simpan" value="Simpan">
+            @if(!empty($pengajuan->bukti_scan))
+            <a href="{{base_url('upload/'.$pengajuan->bukti_scan)}}" target="_blank" class="btn btn-success">Download</a>
+            @endif
           </td>
         </tr>
       </form>

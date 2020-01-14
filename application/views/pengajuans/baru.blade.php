@@ -8,7 +8,7 @@
     <div class="col-sm-10 pengusul-container">
       <div class="pengusul-wrap">
         <select name="id_pengusul" id="pengusul" class="form-control">
-          <option>Pilih...</option>
+          <option value="">Pilih...</option>
           @foreach($akd_dosens as $key)
           <option value="{{$key->id}}">{{$key->name}}</option>
           @endforeach
@@ -28,7 +28,7 @@
     <div class="col-sm-6 anggota-container">
       <div class="anggota-wrap">
         <select name="anggota[]" id="anggota" class="form-control">
-          <option>Pilih...</option>
+          <option value="">Pilih...</option>
           @foreach($akd_dosens as $key)
           <option value="{{$key->id}}">{{$key->name}}</option>
           @endforeach
@@ -80,8 +80,7 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Kirim</button>
-      
+      <button type="submit" name="button_1" class="btn btn-primary">Simpan</button>
     </div>
   </div>
 </form>

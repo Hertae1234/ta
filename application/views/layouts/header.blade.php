@@ -19,7 +19,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Detail</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="<?php echo base_url('login/logout'); ?>">Logout</a>
         </div>
     </div>    
   </div>

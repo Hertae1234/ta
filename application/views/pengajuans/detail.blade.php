@@ -1,15 +1,24 @@
 @extends('layouts.master')
 @section('content')
-
 <div class="card border-light mb-3";>
-  <div class="card-header">Detail Pengajuan</div>
+  <div class="card-header">Detail pengajuan</div>
   <div class="card-body">
-    <h5 class="card-title">Status: Dalam Proses</h5>
+    @if ($pengajuan->status == 'ditolak')
+      <h5 class="card-title" style="color: red">Status: DITOLAK karena: {{$pengajuan->catatan}}</h5>
+    @elseif($pengajuan->status == 'diproses')
+      <h5 class="card-title">Status: Sedang diproses, perkiraan waktu selesai: {{$pengajuan->tanggal_selesai}}</h5>
+    @elseif($pengajuan->status == 'selesai')
+      <h5 class="card-title">Status: Selesai, {{$pengajuan->catatan}}</h5>     
+    @elseif($pengajuan->status == 'diajukan')
+      <h5 class="card-title">Status: Sudah diajukan, harap menunggu informasi selanjutnya</h5>     
+    @else
+      <h5 class="card-title">Status: Draf</h5>     
+    @endif
 
       <!-- form detail pengajuan -->
       <table class="table">
         <tr>
-          <th scope="col">Nama Pengusul</th>
+          <th width="200" scope="col">Nama Pengusulaa</th>
           <td scope="col">{{$pengajuan->name}}</td>
         </tr>
         <tr>
@@ -40,46 +49,17 @@
           <th scope="row">Total</th>
           <td>{{$pengajuan->total}}</td>
         </tr>
-        <tr>
-          <form>
-            <div class="form-group">
-          <th scope="row">{{$pengajuan->status}}</th>
-          <td>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Dalam Proses
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Selesai
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-              <label class="form-check-label" for="exampleRadios2">
-                Ditolak
-              </label>
-            </div>
-          </td>
-          </div>  
-          </form>
-        </tr>
-        <tr>
-          <th scope="row">File Scan </th>
-          <td>
-            <input type="file" name="berkas" />
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <input class="btn btn-primary" type="submit" value="Simpan">
-          </td>
-        </tr>
-      </table> 
+      </table>
+      @if($pengajuan->status == 'draf')
+          <a href="{{site_url('pengajuan/edit/'.$pengajuan->id)}}" class="btn btn-primary">Edit</a>
+          <a href="{{site_url('pengajuan/ajukan/'.$pengajuan->id)}}" class="btn btn-success">Ajukan</a>
+          <a href="/TA/pengajuan/status" class="btn btn-primary" role="button" aria-pressed="true">Kembali</a>
+        
+      @endif
+      @if($pengajuan->bukti_scan != NULL && $pengajuan->status == 'selesai')
+        <a href="{{base_url('upload/'.$pengajuan->bukti_scan)}}" target="_blank" class="btn btn-success">Download</a>
+      @endif
+
   </div>
 </div>
 
