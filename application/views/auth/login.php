@@ -38,12 +38,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login Page</h1>
                   </div>
-                  <form class="user" method="post" action="<?= base_url('admin/index') ?>">
+                  <form class="user" method="post" action="<?= base_url('login/aksi_login') ?>">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="email" placeholder="Masukkan Nama..." name="name">
+                      <input type="text" class="form-control form-control-user" id="email" placeholder="Masukkan Nama..." name="username">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password">
+                      <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password[]">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">

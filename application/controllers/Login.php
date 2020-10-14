@@ -17,11 +17,7 @@ class Login extends CI_Controller{
 	{
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$where = array(
-			'username' => $username,
-			'password' => md5($password)
-			);
-		$cek = $this->Login_model->cek_login("ttd_users",$where)->num_rows();
+		$cek = $this->Login_model->cek_login($username, $password);
 		if($cek > 0){
 
 			$data_session = array(
