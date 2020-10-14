@@ -6,7 +6,7 @@ class Login extends CI_Controller{
 	{
 		parent::__construct();		
 		$this->load->model('Login_model');
-
+		$this->load->library('form_validation');
 	}
 
 	function index(){
@@ -31,7 +31,7 @@ class Login extends CI_Controller{
 
 			$this->session->set_userdata($data_session);
 
-			redirect(base_url("admin"));
+			return redirect(base_url("admin/index"));
 
 		}else{
 			echo "Username dan password salah !";
