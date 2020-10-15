@@ -43,7 +43,7 @@
                       <input type="text" class="form-control form-control-user" id="email" placeholder="Masukkan Nama..." name="username">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password[]">
+                      <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">

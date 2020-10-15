@@ -49,7 +49,10 @@
             $(".anggota-container").append($markup);
         });
         $("#btn-anggota2").click(function(){
-            var $markup = $('.anggota-wrap2:first-child').clone().val('');
+            var $markup = $('.anggota-wrap2:first-child').clone();
+            $markup.children().val('');
+            console.log($markup.children());
+            console.log ($markup);
             $(".anggota-container2").append($markup);
         });
         $('[data-toggle="popover"]').popover({
