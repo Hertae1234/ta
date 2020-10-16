@@ -10,6 +10,6 @@ class Login_model extends CI_Model{
 			'username' => $username,
 			'password' => $password
 		])
-		->result_array();
+		->row_array();
 	}
 }

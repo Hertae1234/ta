@@ -21,14 +21,17 @@
 	        </div>
 	      </div>
 	      <div><span></span></div>
-	      <div class="card">
-	        <div class="card-header">
-	          Menu Admin
-	        </div>
-	        <div class="list-group list-group-flush">
-	          <a href="<?=site_url('admin')?>" class="list-group-item">Daftar Pengajuan</a>
-	        </div>
-	      </div>
+	      <?php if ($_SESSION['is_admin']): ?>
+		      <div class="card">
+		        <div class="card-header">
+		          Menu Admin
+		        </div>
+		        <div class="list-group list-group-flush">
+		          <a href="<?=site_url('admin')?>" class="list-group-item">Daftar Pengajuan</a>
+		        </div>
+		      </div>
+	      <?php endif ?>	
+	      	
 	    </div>
 
 	    <!-- content -->

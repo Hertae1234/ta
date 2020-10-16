@@ -17,21 +17,28 @@ class Login extends CI_Controller{
 	{
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$cek = $this->Login_model->cek_login($username, $password);
-		if($cek > 0){
+		$cek = $this->Login_model->cek_login(
+			$username, 
+			$password
+		);
+		if(!empty($cek)){
 
 			$data_session = array(
 				'nama' => $username,
+				'is_admin' => $cek['role_id'], 
 				'status' => "login"
 				);
 
 			$this->session->set_userdata($data_session);
 
-			return redirect(base_url("admin/index"));
+			if ($cek['role_id'] == 1) {
+				return redirect(base_url("admin/index"));
+			}
+			
+			return redirect(base_url("pengusul/index"));
 
-		}else{
-			echo "Username dan password salah !";
 		}
+			echo "Username dan password salah !";
 	}
 
 	function logout(){
