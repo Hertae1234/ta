@@ -44,7 +44,7 @@
 		        <div class="list-group list-group-flush">
 		          	<nav class="navbar navbar-light bg-light">
 					    <input class="form-control mr-sm-2" type="search" placeholder="Kata kunci pencarian" aria-label="Search">
-					    <button href="<?=site_url('admin')?>" class="btn btn btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
+					    <button href="<?=site_url('admin?')?>" class="btn btn btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
 					  </form>
 					</nav>
 		        </div>

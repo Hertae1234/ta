@@ -18,14 +18,22 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$pengajuan=$this->pengajuan_model->get_all_detail();
+		if (!isset($_GET['sort'])) {
 		
-		$data['pengajuan']=$pengajuan;
+			$pengajuan=$this->pengajuan_model->get_all_detail();
+			$data['pengajuan']=$pengajuan;
+		} 
+
+		else {
+			$order = $_GET['sort'];
+			$pengajuan=$this->pengajuan_model->order_by($order);
+			$data['pengajuan']=$pengajuan;
+
+		}
 
 		return view('admins/home', $data);
 
 	}
-
 
 	public function status()
 	{

@@ -102,7 +102,7 @@
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-9 col-sm-9  offset-md-3">
-              <button href ="{{base_url('')}}" type="button" class="btn btn-primary">Kembali</button>
+              <button href ="" type="button" class="btn btn-primary">Kembali</button>
               <button type="submit" name="submit" value="Simpan" class="btn btn-success">Simpan</button>
             </div>
           </div>

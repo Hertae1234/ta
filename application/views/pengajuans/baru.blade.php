@@ -25,7 +25,7 @@
   <div class="form-group row">
     <label for="anggota" class="col-sm-2 col-form-label">Anggota</label>
     <div class="col-sm-2">Dosen atau Tendik</div>    
-    <div class="col-sm-6 anggota-container">
+    <div class="col-sm-5 anggota-container">
       <div class="anggota-wrap">
         <select name="anggota[]" id="anggota" class="form-control">
           <option value="">Pilih...</option>
@@ -42,16 +42,14 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label"></label>
     <div class="col-sm-2">Mahasiswa</div>
-      <div class="col-sm-6 anggota-container2">
+      <div class="col-sm-5 anggota-container2">
         <div class="anggota-wrap2">
           <input type="text" name="mahasiswa[]" class="form-control" id="anggota" placeholder="Nama">
         </div>
       </div>
-        <div class="col-sm-2">
-          <div id="section2" class="col-sm-2">
+          <div id="section2" class="col-sm-2" >
             <button type="button" id="btn-anggota2">Tambah</button>
           </div>  
-        </div>
   </div>
   <div class="form-group row">
     <label for="sumber_dana" class="col-sm-2 col-form-label">Sumber Dana</label>

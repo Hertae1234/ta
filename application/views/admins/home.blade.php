@@ -7,21 +7,32 @@
 <div class="table-responsive">
 
 
-<table id="mytable" class="table table-hover table-striped">
+<table id="daftar_pengajuan" class="table table-hover table-striped">
    
   <thead>
       <th>No</th>
-      <th>Nama</th>
-      <th>Judul</th>
-      <th>Tujuan</th>
-      <th>Sumber Dana</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th></th>
+      <th>
+        <a href="?sort=name">Nama</a>
+      </th>
+      <th>
+        <a href="?sort=judul">Judul</a>
+      </th>
+      <th>
+        <a href="?sort=tujuan">Tujuan</a>
+        </th>
+      <th>
+        <a href="?sort=sumber_dana">Sumber Dana</a>
+        </th>
+      <th>
+        <a href="?sort=total">Total</a>
+      </th>
+      <th>Aksi</th>
   </thead>
 
   <tbody> 
+
     <?php $i =1; ?>
+
     @foreach($pengajuan as $p)
     @if($p->status != "draf")
     <tr>

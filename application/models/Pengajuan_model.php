@@ -31,6 +31,17 @@ class Pengajuan_model extends CI_Model
 
 	}
 
+	public function order_by($order)
+	{
+		return $this->db->select("p.id, p.judul, p.tujuan, p.sumber_dana, p.total, p.status, d.name")
+						->from("ttd_pengajuan p")
+						->join("akd_dosens d" , "d.id = p.id_pengusul")
+						->order_by($order, "asc")
+						->get()->result();
+
+	}
+
+
 	public function get_detail($id_pengajuan)
 	{
 		return $this->db->select("p.id, p.judul, p.tujuan, p.sumber_dana, p.total, p.status, p.catatan, p.tanggal_selesai, p.bukti_scan, d.name")
