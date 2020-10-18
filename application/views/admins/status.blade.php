@@ -3,7 +3,7 @@
 {!!$message!!}
 
 <div class="col-md-12">
-<h4>Daftar Pengajuan</h4>
+<h4>Pengajuan Diproses</h4>
 <div class="table-responsive">
 
 
@@ -16,8 +16,7 @@
       <th>Tujuan</th>
       <th>Sumber Dana</th>
       <th>Total</th>
-      <th>Status</th>
-      <th></th>
+      <th>Aksi</th>
   </thead>
 
   <tbody> 
@@ -40,7 +39,7 @@
           @elseif($p->status == "selesai")
           <span class="badge badge-pill badge-success">Selesai</span>
           @else
-          <span class="badge badge-pill badge-primary">Belum Ditanggapi</span>
+          <span class="badge badge-pill badge-primary">Diajukan</span>
           @endif
       </td>
     </tr>

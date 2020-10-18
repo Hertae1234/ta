@@ -2,117 +2,114 @@
 @section('content')
 {!!$message!!}
 
-<div class="card border-light mb-3";>
-  <div class="card-header">Detail PengajuanA</div>
-  <div class="card-body">
-    
-    <!-- form detail pengajuan -->
-    <table class="table">
-      <tr>
-        <th scope="col" width="200">Nama Pengusul</th>
-        <td scope="col">{{$pengajuan->name}}</td>
-      </tr>
-      <tr>
-        <th scope="col">Anggota</th>
-        <td scope="col">
-          @foreach($pengajuan->anggota as $anggota) 
-            @if(!empty($anggota->nama_dosen))
-              {{$anggota->nama_dosen}},
-            @else
-              {{$anggota->nama_mahasiswa}},
-            @endif
-          @endforeach
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Judul</th>
-        <td>{{$pengajuan->judul}}</td>
-      </tr>
-        <tr>
-        <th scope="row">Tujuan</th>
-        <td>{{$pengajuan->tujuan}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Sumber Dana</th>
-        <td>{{$pengajuan->sumber_dana}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Total</th>
-        <td>{{$pengajuan->total}}</td>
-      </tr>
-    </table>
-  </div>
-</div>
+<div class="col-md-12">
+<h4>Detail Pengajuan</h4>
+<form action="{{site_url('admin/update ')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
+  <div class="col-md-9 ">
+    <div class="x_panel">
+      <div class="x_title">
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br>
+        <form class="form-horizontal form-label-left">
 
-<div class="card border-light mb-3";>
-  <div class="card-header">Ubah Detail</div>
-  <div class="card-body">
-
-    <!-- FORM EDIT DETAIL -->
-    <table class="table">
-      <form action="{{site_url('admin/update ')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
-        <input type="hidden" name="id" value="{{$pengajuan->id}}"> <!-- id akan dipakai untuk memilih data mana yang akan di update -->
-        <tr>
-          <div class="form-group">
-              <th scope="row" width="200">Status</th>
-              <td>
-                <div class="form-group col-md-4">
-
-                  @if($pengajuan->status=='diajukan')
-                    <span class="badge badge-primary"><label for="status">Diajukan</label></span>
-                  @elseif($pengajuan->status=='diproses')
-                    <span class="badge badge-info"><label for="status">Diproses</label></span>
-                  @elseif($pengajuan->status=='selesai')
-                    <span class="badge badge-success"><label for="status">Selesai</label></span>
-                  @else
-                    <span class="badge badge-danger"><label for="status">Ditolak</label></span>
-                  @endif
-                  @if($pengajuan->status!='selesai' && $pengajuan->status!='ditolak' )
-                  <select class="form-control" name="status" id="status"> <!-- 'name' di sini mengikuri database -->
-                    <!-- value di sini mengikuti enum pada database -->
-                    <option>Ubah Status</option>
-                    <option value="diproses">diproses</option>
-                    <option value="ditolak">ditolak</option>
-                    <option value="selesai">selesai</option>
-                  </select>
-                  @endif
-                </div>
-              </td>
+          <div class="form-group row ">
+            <label class="control-label col-md-3 col-sm-3 ">Nama Pengusul</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">{{$pengajuan->name}}</td>
+            </div>
           </div>
-        </tr>
-        @if($pengajuan->status!='ditolak' && $pengajuan->status!='selesai')
-        <tr>
-          <th scope="row">Waktu Selesai (perkiraan) </th>
-          <td>
-            <input type="date" name="tanggal_selesai" min="1979-12-31" max="2079-12-31" value="{{$pengajuan->tanggal_selesai}}"><br>
-          </td>
-        </tr>
-        @endif
-        <tr>
-          <th scope="row">Catatan </th>
-          <td>
-            <input class="form-control" id="catatan" name="catatan" value="{{$pengajuan->catatan}}">
-          </td>
-        </tr>
-        @if($pengajuan->status != 'selesai')
-        <tr>
-          <th scope="row">File Scan </th>
-          <td>
-            <input type="file" name="bukti_scan"/>
-          </td>
-        </tr>
-        @endif
-        <tr>
-          <td>
-            <input class="btn btn-primary" type="submit" name="Simpan" value="Simpan">
-            @if(!empty($pengajuan->bukti_scan))
-            <a href="{{base_url('upload/'.$pengajuan->bukti_scan)}}" target="_blank" class="btn btn-success">Download</a>
-            @endif
-          </td>
-        </tr>
-      </form>
-    </table> 
-  </div>
-</div>
+          <div class="form-group row">
+            <label class="control-label col-md-3 col-sm-3 ">Nama Anggota</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">
+                @foreach($pengajuan->anggota as $anggota) 
+                  @if(!empty($anggota->nama_dosen))
+                    {{$anggota->nama_dosen}},
+                  @else
+                    {{$anggota->nama_mahasiswa}},
+                  @endif
+                @endforeach
+              </td>
+            </div>
+          </div>
 
+          <div class="form-group row ">
+            <label class="control-label col-md-3 col-sm-3 ">Judul</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">{{$pengajuan->judul}}</td>
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <label class="control-label col-md-3 col-sm-3 ">Tujuan</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">{{$pengajuan->tujuan}}</td>
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <label class="control-label col-md-3 col-sm-3 ">Sumbar Dana</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">{{$pengajuan->sumber_dana}}</td>
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <label class="control-label col-md-3 col-sm-3 ">Total</label>
+            <div class="col-md-9 col-sm-9 ">
+              <td type="text" class="form-control" placeholder="Default Input">{{$pengajuan->total}}</td>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-md-3 col-sm-3 ">Status</label>
+            <div class="col-md-6 col-sm-9">
+              <select class="form-control" name="status" id="status">
+                <option>{{$pengajuan->status}}</option>
+                <option value="diproses">Diproses</option>
+                <option value="ditolak">Ditolak</option>
+                <option value="selesai">Selesai</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-md-3 col-sm-3 ">Pesan</label>
+            <div class="col-md-6 col-sm-9 ">
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+          <label class="control-label col-md-3 col-sm-3 ">Kelola Berkas</label>
+
+          @if(!empty($pengajuan->bukti_scan))
+            <td>{{$pengajuan->bukti_scan}}</td>
+            <a href="{{base_url('upload/'.$pengajuan->bukti_scan)}}" target="_blank" class="btn btn-success">Download</a>
+          @else
+            <input type="file" name="bukti_scan"/>
+          @endif
+          </div>
+
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9  offset-md-3">
+              <button href ="{{base_url('')}}" type="button" class="btn btn-primary">Kembali</button>
+              <button type="submit" name="submit" value="Simpan" class="btn btn-success">Simpan</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
 @endsection

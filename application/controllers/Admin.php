@@ -26,6 +26,27 @@ class Admin extends CI_Controller {
 
 	}
 
+
+	public function status()
+	{
+		$status = $this->pengajuan_model->get_detail_by_status($_GET['status']);
+		
+		$data['pengajuan']=$status; 
+
+		return view('admins/status', $data);
+	}
+
+	public function arsip()
+	{
+		$arsip = $_GET['status'];
+		$status = $this->pengajuan_model->get_detail_by_status($arsip);
+		
+		$data['pengajuan']=$status; 
+
+		return view('admins/status', $data);
+	}
+
+
 	public function pengajuan($id_pengajuan)
 	{
 		$pengajuan=$this->pengajuan_model->get_detail($id_pengajuan);

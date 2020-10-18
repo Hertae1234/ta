@@ -10,16 +10,19 @@
 	  <div class="row">
 	    <!-- side bar -->
 	    <div class="col-3">
+
+	      <?php if ($_SESSION['is_admin'] == 0): ?>
 	      <div class="card">
 	        <div class="card-header">
 	          Menu Pengusul
 	        </div>
 	        <div class="list-group list-group-flush">
-	          
-	          <a href="<?=site_url('pengajuan/baru')?>" class="list-group-item">Pengajuan Baru</a>
+	          <a href="<?=site_url('pengajuan/baru')?>" class="list-group-item">Buat Baru</a>
 	          <a href="<?=site_url('pengajuan/status')?>" class="list-group-item">Status</a>
 	        </div>
 	      </div>
+	      <?php endif; ?>
+
 	      <div><span></span></div>
 	      <?php if ($_SESSION['is_admin']): ?>
 		      <div class="card">
@@ -27,7 +30,26 @@
 		          Menu Admin
 		        </div>
 		        <div class="list-group list-group-flush">
-		          <a href="<?=site_url('admin')?>" class="list-group-item">Daftar Pengajuan</a>
+		          <a href="<?=site_url('admin/status?status=diajukan')?>" class="list-group-item">Belum Diproses</a>
+		        </div>
+		        <div class="list-group list-group-flush">
+		          <a href="<?=site_url('admin/status?status=diproses')?>" class="list-group-item">Sedang Diproses</a>
+		        </div>
+		        <div class="list-group list-group-flush">
+		          <a href="<?=site_url('admin/status?status=selesai')?>" class="list-group-item">Selesai</a>
+		        </div>
+		        <div class="list-group list-group-flush">
+		          <a href="<?=site_url('admin/status?status=ditolak')?>" class="list-group-item">Ditolak</a>
+		        </div>
+		        <div class="list-group list-group-flush">
+		          	<nav class="navbar navbar-light bg-light">
+					    <input class="form-control mr-sm-2" type="search" placeholder="Kata kunci pencarian" aria-label="Search">
+					    <button href="<?=site_url('admin')?>" class="btn btn btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
+					  </form>
+					</nav>
+		        </div>
+		        <div class="list-group list-group-flush">
+		          <a href="<?=site_url('admin/buat_akun')?>" class="list-group-item">Kelola Akun</a>
 		        </div>
 		      </div>
 	      <?php endif ?>	

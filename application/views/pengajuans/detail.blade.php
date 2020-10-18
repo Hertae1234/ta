@@ -16,9 +16,9 @@
     @endif
 
       <!-- form detail pengajuan -->
-      <table class="table">
+      <table>
         <tr>
-          <th width="200" scope="col">Nama Pengusulaa</th>
+          <th width="200" scope="col">Nama Pengusul</th>
           <td scope="col">{{$pengajuan->name}}</td>
         </tr>
         <tr>

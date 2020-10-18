@@ -5,7 +5,7 @@
 <form action="<?php echo site_url('pengajuan/store') ?>" method="post">
   <div class="form-group row">
     <label for="pengusul" class="col-sm-2 col-form-label">Nama Pengusul</label>
-    <div class="col-sm-10 pengusul-container">
+    <div class="col-sm-6 pengusul-container">
       <div class="pengusul-wrap">
         <select name="id_pengusul" id="pengusul" class="form-control">
           <option value="">Pilih...</option>
@@ -68,18 +68,16 @@
   </div>
     <div class="form-group row">
     <label for="tujuan" class="col-sm-2 col-form-label">Tujuan</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <input type="text" name="tujuan" class="form-control" id="tujuan" placeholder="Tujuan">
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="total" class="col-sm-2 col-form-label">Total</label>
-    <div class="col-sm-10">
+    <label for="total" class="col-sm-1 col-form-label">Total</label>
+    <div class="col-sm-5">
       <input type="text" name="total" class="form-control" id="total" placeholder="Total">
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <button type="submit" name="button_1" class="btn btn-primary">Simpan</button>
     </div>
   </div>
