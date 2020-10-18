@@ -5,7 +5,7 @@
 <form action="<?php echo site_url('pengajuan/store') ?>" method="post">
   <div class="form-group row">
     <label for="pengusul" class="col-sm-2 col-form-label">Nama Pengusul</label>
-    <div class="col-sm-6 pengusul-container">
+    <div class="col-sm-9 pengusul-container">
       <div class="pengusul-wrap">
         <select name="id_pengusul" id="pengusul" class="form-control">
           <option value="">Pilih...</option>
@@ -18,8 +18,8 @@
   </div>
   <div class="form-group row">
     <label for="judul" class="col-sm-2 col-form-label">Judul</label>
-    <div class="col-sm-10">
-      <input type="text" name="judul" class="form-control" id="judul" placeholder="Judul">
+    <div class="col-sm-9">
+      <textarea type="text" name="judul" class="form-control" id="judul" placeholder="Judul"></textarea>
     </div>
   </div>
   <div class="form-group row">
@@ -61,7 +61,7 @@
         <option value="eksternal">Eksternal</option>
       </select>                
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-7">
       <label for="keterangan" class="sr-only">Keterangan</label>
       <input name="sumber_dana" type="text" class="form-control" id="keterangan" placeholder="Keterangan">
     </div>
@@ -72,7 +72,7 @@
       <input type="text" name="tujuan" class="form-control" id="tujuan" placeholder="Tujuan">
     </div>
     <label for="total" class="col-sm-1 col-form-label">Total</label>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
       <input type="text" name="total" class="form-control" id="total" placeholder="Total">
     </div>
   </div>
