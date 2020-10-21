@@ -58,7 +58,7 @@ class Pengajuan_model extends CI_Model
 						->from("ttd_pengajuan p")
 						->join("akd_dosens d" , "d.id = p.id_pengusul")
 						->where("d.nidn", $nidn)
-						->get()->row();
+						->get()->result();
 
 	}
 

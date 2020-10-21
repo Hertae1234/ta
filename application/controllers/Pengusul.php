@@ -7,7 +7,7 @@ class Pengusul extends CI_Controller {
         $this->load->model("pengajuan_model");
         $this->load->model("anggota_model");
         $this->load->library('session');
-        $this->session->set_userdata('username', 'admin');
+        // $this->session->set_userdata('username', 'admin');
 
 		if($this->session->userdata('status') != "login")
 		{
@@ -17,13 +17,11 @@ class Pengusul extends CI_Controller {
 
 	public function index()
 	{
-		$nidn = $this->session->userdata['username'];
+		$nidn = $this->session->userdata('username');
 		$pengajuan = [];
-	
 		if (is_numeric($nidn)) {
-			$pengajuan = $this->pengajuan_model->get_detail_by_nidn();
+			$pengajuan = $this->pengajuan_model->get_detail_by_nidn($nidn);
 		}
-		
 		$data['pengajuan'] = $pengajuan;
 
 		return view('pengusuls/index', $data);

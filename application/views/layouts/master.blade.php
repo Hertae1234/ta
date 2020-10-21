@@ -49,7 +49,7 @@
 					</nav>
 		        </div>
 		        <div class="list-group list-group-flush">
-		          <a href="<?=site_url('admin/buat_akun')?>" class="list-group-item">Kelola Akun</a>
+		          <a href="<?=site_url('admin/kelola_akun')?>" class="list-group-item">Kelola Akun</a>
 		        </div>
 		      </div>
 	      <?php endif ?>	

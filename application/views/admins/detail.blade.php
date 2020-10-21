@@ -4,7 +4,7 @@
 
 <div class="col-md-12">
 <h4>Detail Pengajuan</h4>
-<form action="{{site_url('admin/update')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
+<form action="{{site_url('admin/update/'.$pengajuan->id)}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
   <div class="col-md-9 ">
     <div class="x_panel">
       <div class="x_title">

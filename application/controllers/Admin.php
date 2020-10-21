@@ -66,9 +66,9 @@ class Admin extends CI_Controller {
 	}
 
 
-	public function update()
+	public function update($id_pengajuan)
 	{
-		$id_pengajuan		= $this->input->post('id');
+
 		$status				= $this->input->post('status'); 
 		$catatan 			= $this->input->post('catatan'); 
 		$tanggal_selesai	= $this->input->post('tanggal_selesai'); 
@@ -142,5 +142,14 @@ class Admin extends CI_Controller {
                     $this->load->view('upload_success', $data);
             }
     }
+
+    public function kelola_akun()
+  	{
+  		
+  		$data['akd_dosens']=$this->dosen_model->get_all();
+
+
+  		return view('pengajuans/baru', $data);
+  	}
 
 } 

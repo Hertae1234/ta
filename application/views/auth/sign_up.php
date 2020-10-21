@@ -36,23 +36,25 @@
               <div class="col-lg">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Halaman Login</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Halaman Sign Up</h1>
                   </div>
-                  <form class="user" method="post" action="<?= base_url('login/aksi_login') ?>">
+                  <form class="user" method="post" action="<?= base_url('login/aksi_sign_up') ?>">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="username" placeholder="Username" name="username">
+                      <input type="text" class="form-control form-control-user" id="email" placeholder="Username" name="username">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" placeholder="Password" name="password">
                     </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="password2" placeholder="Konfirmasi Password" name="password2">
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                      Login
+                      Sign Up
                     </button>
+
                   </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="login/sign_up">Sign Up</a>
-                  </div>
                 </div>
               </div>
             </div>

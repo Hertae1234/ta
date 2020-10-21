@@ -36,7 +36,14 @@ class Pengajuan extends CI_Controller {
 	
 	public function status()
 	{
-		$pengajuan=$this->pengajuan_model->get_all_detail();
+		if ($this->session->userdata('is_admin') == '0') {
+			$pengajuan=$this->pengajuan_model->get_detail_by_nidn($this->session->userdata('username'));
+		} 
+
+		else {
+			$pengajuan=$this->pengajuan_model->get_all_detail();
+		}
+
 
 		$data['pengajuan']=$pengajuan;		
 		return view('pengajuans/status', $data);
