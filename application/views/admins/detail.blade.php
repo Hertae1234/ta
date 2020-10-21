@@ -4,7 +4,7 @@
 
 <div class="col-md-12">
 <h4>Detail Pengajuan</h4>
-<form action="{{site_url('admin/update ')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
+<form action="{{site_url('admin/update')}}" method="post" enctype="multipart/form-data" > <!-- memanggil method update di controller admin -->
   <div class="col-md-9 ">
     <div class="x_panel">
       <div class="x_title">
@@ -18,7 +18,7 @@
       </div>
       <div class="x_content">
         <br>
-        <form class="form-horizontal form-label-left">
+        
 
           <div class="form-group row ">
             <label class="control-label col-md-3 col-sm-3 ">Nama Pengusul</label>
@@ -107,7 +107,6 @@
             </div>
           </div>
 
-        </form>
       </div>
     </div>
   </div>

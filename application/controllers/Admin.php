@@ -18,6 +18,8 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->helper('url');
+		$this->load->library('javascript');
 		if (!isset($_GET['sort'])) {
 		
 			$pengajuan=$this->pengajuan_model->get_all_detail();
@@ -85,6 +87,7 @@ class Admin extends CI_Controller {
 
 		if (!empty($_FILES['bukti_scan']['name'])) {
 			$config['upload_path']          = APPPATH.'../upload/';
+			$config['file_name']			= $_FILES['bukti_scan']['name'];
             $config['allowed_types']        = 'jpg|png|pdf';
             $config['file_ext_tolower']     = TRUE;
             $config['encrypt_name']        	= TRUE;
@@ -134,6 +137,7 @@ class Admin extends CI_Controller {
             else
             {
                     $data = array('upload_data' => $this->upload->data());
+
 
                     $this->load->view('upload_success', $data);
             }

@@ -1,35 +1,31 @@
 @extends('layouts.master')
 @section('content')
+
 {!!$message!!}
+
 
 <div class="col-md-12">
 <h4>Daftar Pengajuan</h4>
 <div class="table-responsive">
 
 
-<table id="daftar_pengajuan" class="table table-hover table-striped">
+<table id="daftar_pengajuan" class="table table-hover table-striped table-condensed">
    
   <thead>
       <th>No</th>
-      <th>
-        <a href="?sort=name">Nama</a>
+      <th class="th-sm">
+        <a href="?sort=name">Nama Pengusul</a>
       </th>
-      <th>
+      <th class="th-sm">
         <a href="?sort=judul">Judul</a>
       </th>
-      <th>
+      <th class="th-sm">
         <a href="?sort=tujuan">Tujuan</a>
         </th>
-      <th>
-        <a href="?sort=sumber_dana">Sumber Dana</a>
-        </th>
-      <th>
-        <a href="?sort=total">Total</a>
-      </th>
       <th>Aksi</th>
   </thead>
 
-  <tbody> 
+  <tbody class="tbody-sm"> 
 
     <?php $i =1; ?>
 
@@ -40,10 +36,8 @@
       <td>{{ $p->name}}</td>
       <td>{{ $p->judul}} </td>
       <td>{{ $p->tujuan}}</td>
-      <td>{{ $p->sumber_dana}}</td>
-      <td>{{ $p->total}}</td>
       <td>
-          <a href="{{site_url('admin/pengajuan/'.$p->id)}}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Detail</a>
+          <a href="{{site_url('admin/pengajuan/'.$p->id)}}">Detail</a>
           @if($p->status == "ditolak")
           <span class="badge badge-pill badge-danger">Ditolak</span>
           @elseif($p->status == "diproses")
@@ -51,7 +45,7 @@
           @elseif($p->status == "selesai")
           <span class="badge badge-pill badge-success">Selesai</span>
           @else
-          <span class="badge badge-pill badge-primary">Belum Ditanggapi</span>
+          <span class="badge badge-pill badge-primary">BARU!</span>
           @endif
       </td>
     </tr>
@@ -81,5 +75,10 @@
     </li>
   </ul>
 </nav>
+<link rel = "stylesheet" type = "text/css" 
+   href = "<?php echo base_url(); ?>css/styles.css">
+
+<script type = 'text/javascript' src = "<?php echo base_url(); 
+   ?>js/ajax.js"></script>
 
 @endsection
