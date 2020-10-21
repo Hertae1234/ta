@@ -7,7 +7,6 @@ class Pengusul extends CI_Controller {
         $this->load->model("pengajuan_model");
         $this->load->model("anggota_model");
         $this->load->library('session');
-        // $this->session->set_userdata('username', 'admin');
 
 		if($this->session->userdata('status') != "login")
 		{

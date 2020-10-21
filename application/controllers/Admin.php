@@ -8,7 +8,6 @@ class Admin extends CI_Controller {
         $this->load->model("pengajuan_model");
         $this->load->model("anggota_model");
         $this->load->library('session');
-        $this->session->set_userdata('username', 'admin');
 
 		if($this->session->userdata('status') != "login")
 		{
@@ -18,6 +17,10 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+
+        if ($_SESSION['is_admin'] == '0') {
+        	return redirect()->back();
+        }
 		$this->load->helper('url');
 		$this->load->library('javascript');
 		if (!isset($_GET['sort'])) {

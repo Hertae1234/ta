@@ -10,6 +10,15 @@ class Login extends CI_Controller{
 	}
 
 	function index(){
+
+
+		if (isset($_SESSION['status']) && $_SESSION['status'] == 'login') {
+			if ($_SESSION['is_admin'] = '1') {
+				return redirect('admin');
+			}
+			return redirect('pengusul');
+		}
+
 		$this->load->view('auth/login');
 	}
 
@@ -47,7 +56,12 @@ class Login extends CI_Controller{
 
 	function logout(){
 		$this->session->sess_destroy();
-		redirect(base_url('login'));
+
+		echo "<script>
+				alert('Berhasil Logout');
+				window.location.href='".base_url('login')."';	
+				</script>"		;
+
 	}
 
 	function aksi_sign_up(){
@@ -94,12 +108,14 @@ class Login extends CI_Controller{
 		//jika ada nidn benar, buat akun dan set session
 		$this->Login_model->create_user([
 			'username' => $username,
+			'fullname' => $cek_dosen['name'],
 			'password' => md5($password),
 			'role_id'  => '0'
 		]);
 
 		$data_session = array(
 			'username' => $username,
+			'fullname' => $cek_dosen['name'],
 			'is_admin' => '0', 
 			'status' => "login"
 			);
