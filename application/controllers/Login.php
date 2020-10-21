@@ -13,7 +13,7 @@ class Login extends CI_Controller{
 
 
 		if (isset($_SESSION['status']) && $_SESSION['status'] == 'login') {
-			if ($_SESSION['is_admin'] = '1') {
+			if ($_SESSION['is_admin'] == '1') {
 				return redirect('admin');
 			}
 			return redirect('pengusul');
