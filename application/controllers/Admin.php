@@ -59,12 +59,14 @@ class Admin extends CI_Controller {
 
 	public function pengajuan($id_pengajuan)
 	{
+		parse_str($_SERVER['QUERY_STRING'], $params);
+
 		$pengajuan=$this->pengajuan_model->get_detail($id_pengajuan);
 		$pengajuan->anggota=$this->anggota_model->get_all($id_pengajuan);
 		$data['pengajuan']=$pengajuan;
+		$data['params']=$params;
 		return view('admins/detail', $data);
 	}
-
 
 	public function update($id_pengajuan)
 	{

@@ -75,6 +75,7 @@ class Pengajuan extends CI_Controller {
 		$pengajuan=$this->pengajuan_model->get_detail($id_pengajuan);
 		$pengajuan->anggota=$this->anggota_model->get_all($id_pengajuan);
 		$data['pengajuan']=$pengajuan;
+
 		return view('pengajuans/detail', $data);
 	}
 	
@@ -83,13 +84,15 @@ class Pengajuan extends CI_Controller {
 		$pengajuan=$this->pengajuan_model->get($id_pengajuan);
 		$pengajuan->anggota=$this->anggota_model->get_all($id_pengajuan);
 		$data['akd_dosens']=$this->dosen_model->get_all();
+  		$data['pengusul'] = $this->dosen_model->get_pengusul($this->session->userdata('username'));
   		$data['pengajuan'] = $pengajuan;
-  		return view('pengajuans/edit', $data);
+  		return view('pengajuans/baru', $data);
   	}
 
-	public function store()
+	public function store($status)
 	{
 		// Collecting data
+		$id_pengajuan   = $this->input->post('id_pengajuan');
 		$id_pengusul	= $this->input->post('id_pengusul');
 		$judul 			= $this->input->post('judul');
 		$anggota 		= $this->input->post('anggota[]');
@@ -106,10 +109,14 @@ class Pengajuan extends CI_Controller {
 			'jenis_sumber_dana'	=> $jenis_sumber_dana,
 			'sumber_dana' 	=> $sumber_dana,
 			'total' 		=> $total,
-			'status' 		=> 'draf'
+			'status' 		=> !empty($status)? $status : 'draf'
 		];
 
-		$save = $this->pengajuan_model->insert($data);
+
+
+		$save = empty($id_pengajuan) 
+			? $this->pengajuan_model->insert($data)
+			: $this->pengajuan_model->update($data, $id_pengajuan);
 
 		if ($save) {
 			$id_pengajuan=$this->db->insert_id();
@@ -141,68 +148,6 @@ class Pengajuan extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('msg_error', 'New post can\'t be save! Please try again.');
 		}
-		redirect('pengajuan/status');
-	}
-
-	public function update()
-	{
-		$id_pengajuan = $this->input->post('id');
-		$id_pengusul	= $this->input->post('id_pengusul');
-		$judul 			= $this->input->post('judul');
-		$anggota 		= $this->input->post('anggota[]');
-		$mahasiswa 		= $this->input->post('mahasiswa[]');
-
-		$jenis_sumber_dana 	= $this->input->post('jenis_sumber_dana');
-		$sumber_dana	= $this->input->post('sumber_dana');
-		$tujuan 		= $this->input->post('tujuan');
-		$total 			= $this->input->post('total');
-		
-
-
-		$data = [
-			'id_pengusul' 	=> $id_pengusul,
-			'judul' 	  	=> $judul,
-			'tujuan'		=> $tujuan,
-			'jenis_sumber_dana'	=> $jenis_sumber_dana,
-			'sumber_dana' 	=> $sumber_dana,
-			'total' 		=> $total
-		];
-
-
-		$save = $this->pengajuan_model->update($data, $id_pengajuan);
-
-		if ($save) {
-			//mereset data anggota
-			$this->anggota_model->delete($id_pengajuan);
-			if (!empty($anggota)) {
-				foreach ($anggota as $value) {
-					if (!empty($value)) {
-						
-						$this->anggota_model->insert([
-							'id_pengajuan' => $id_pengajuan,
-							'id_dosen'		=> $value
-						]);
-					}
-				}
-			}
-
-			if (!empty($mahasiswa)) {
-				foreach ($mahasiswa as $value) {
-					if (!empty($value)) {
-						
-						$this->anggota_model->insert([
-							'id_pengajuan' => $id_pengajuan,
-							'nama'		=> $value
-						]);
-					}
-				}
-			}
-			$this->session->set_flashdata('msg_success', 'Berhasil menyimpan');
-		} else {
-			$this->session->set_flashdata('msg_error', 'Gagal menyimpan');
-		}
-
-
 		redirect('pengajuan/status');
 	}
 

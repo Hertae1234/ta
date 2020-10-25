@@ -51,9 +51,12 @@ class Pengajuan_model extends CI_Model
 		}
 
 		if (!empty($keyword)){
-			$query = $query->where('p.status like "%'. $keyword . '%"')
-						->or_where('d.name like "%'. $keyword . '%"')
-						->or_where('d.judul like "%'. $keyword . '%"');
+
+			$query = $query->group_start()->or_like([
+				'p.status' => $keyword,
+				'p.judul' => $keyword,
+				'd.name' => $keyword,
+			])->group_end();
 		}
 
 		if (!empty($order_by)){
