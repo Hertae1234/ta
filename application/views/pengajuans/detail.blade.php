@@ -53,9 +53,8 @@
       @if($pengajuan->status == 'draf')
           <a href="{{site_url('pengajuan/edit/'.$pengajuan->id)}}" class="btn btn-primary">Edit</a>
           <a href="{{site_url('pengajuan/ajukan/'.$pengajuan->id)}}" class="btn btn-success">Ajukan</a>
-          <a href="/TA/pengajuan/status" class="btn btn-primary" role="button" aria-pressed="true">Kembali</a>
-        
       @endif
+          <a href="/TA/pengajuan/status" class="btn btn-primary" role="button" aria-pressed="true">Kembali</a>
       @if($pengajuan->bukti_scan != NULL && $pengajuan->status == 'selesai')
         <a href="{{base_url('upload/'.$pengajuan->bukti_scan)}}" target="_blank" class="btn btn-success">Download</a>
       @endif

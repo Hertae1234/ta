@@ -1,30 +1,39 @@
-
 @extends('layouts.master')
 @section('content')
 
+<?php /*
+  $query = "SELECT * FROM akd_dosens WHERE nidn = $_SESSION['username']";
+  $result = mysqli_query($query);*/
+
+ $_SESSION['username'];
+?>
+
 <form action="<?php echo site_url('pengajuan/store') ?>" method="post">
   <div class="form-group row">
-    <label for="pengusul" class="col-sm-2 col-form-label">Nama Pengusul</label>
+    <label for="pengusul" required="required" class="col-sm-2 col-form-label">Nama Pengusul</label>
     <div class="col-sm-9 pengusul-container">
-      <div class="pengusul-wrap">
+        @if($_SESSION['is_admin'] == '0')
+          <input type="text" class="form-control" value="{{$pengusul->name}}" disabled >
+          <input type="hidden" name="id_pengusul" value="{{$pengusul->id}}">
+        @else
         <select name="id_pengusul" id="pengusul" class="form-control">
-          <option value="">Pilih...</option>
+          <option value="">Pilih ... </option>
           @foreach($akd_dosens as $key)
           <option value="{{$key->id}}">{{$key->name}}</option>
           @endforeach
         </select>
-      </div>
+        @endif
     </div>
   </div>
   <div class="form-group row">
     <label for="judul" class="col-sm-2 col-form-label">Judul</label>
     <div class="col-sm-9">
-      <textarea type="text" name="judul" class="form-control" id="judul" placeholder="Judul"></textarea>
+      <textarea type="text" name="judul" required="required" class="form-control" id="judul" placeholder="Judul"></textarea>
     </div>
   </div>
   <div class="form-group row">
     <label for="anggota" class="col-sm-2 col-form-label">Anggota</label>
-    <div class="col-sm-2">Dosen atau Tendik</div>    
+    <div class="col-sm-2">Dosen atau Tendig</div>    
     <div class="col-sm-5 anggota-container">
       <div class="anggota-wrap">
         <select name="anggota[]" id="anggota" class="form-control">
@@ -76,6 +85,7 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-6">
+      <a href="{{site_url('pengajuan/ajukan?status=diajukan')}}" class="btn btn-success">Ajukan</a>
       <button type="submit" name="button_1" class="btn btn-primary">Simpan</button>
     </div>
   </div>

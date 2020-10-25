@@ -38,7 +38,29 @@ class Pengajuan_model extends CI_Model
 						->join("akd_dosens d" , "d.id = p.id_pengusul")
 						->order_by($order, "asc")
 						->get()->result();
+	}
 
+	public function get_custom($status = '', $order_by = '', $keyword = '')
+	{
+		$query = $this->db->select("p.id, p.judul, p.tujuan, p.sumber_dana, p.total, p.status, d.name")
+						->from("ttd_pengajuan p")
+						->join("akd_dosens d" , "d.id = p.id_pengusul");
+
+		if (!empty($status)){
+			$query = $query->where("p.status", $status);
+		}
+
+		if (!empty($keyword)){
+			$query = $query->where('p.status like "%'. $keyword . '%"')
+						->or_where('d.name like "%'. $keyword . '%"')
+						->or_where('d.judul like "%'. $keyword . '%"');
+		}
+
+		if (!empty($order_by)){
+			$query = $query->order_by($order_by, 'asc');
+		}
+
+		return $query->get()->result();
 	}
 
 

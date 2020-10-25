@@ -26,7 +26,11 @@ class Dosen_model extends CI_Model
 
 	public function get_all()
 	{
-		return $this->db->get($this->_table)->result();
+		return $this->db->order_by('name')->get($this->_table)->result();
+	}
+	public function get_pengusul($nidn)
+	{
+		return $this->db->get_where($this->_table, ['nidn'=>$nidn])->row();
 	}
 /*
 	public function get_pengusul()

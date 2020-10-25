@@ -11,11 +11,11 @@
    
   <thead>
       <th>No</th>
-      <th><a href="#?sort=name"></a>Nama</th>
-      <th><a href="#?sort=judul">Judul</th>
-      <th><a href="#?sort=tujuan">Tujuan</th>
-      <th><a href="#?sort=sumber_dana">Sumber Dana</th>
-      <th><a href="#?sort=total">Total</th>
+      <th><a href="?sort=name"></a>Nama</th>
+      <th><a href="?sort=judul">Judul</th>
+      <th><a href="?sort=tujuan">Tujuan</th>
+      <th><a href="?sort=sumber_dana">Sumber Dana</th>
+      <th><a href="?sort=total">Total</th>
       <th>Aksi</th>
   </thead>
 

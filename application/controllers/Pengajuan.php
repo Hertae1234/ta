@@ -27,6 +27,10 @@ class Pengajuan extends CI_Controller {
         $this->load->model("anggota_model");
         $this->load->model("dosen_model");
         $this->load->library('form_validation');
+        if($this->session->userdata('status') != "login")
+		{
+			redirect(base_url("login"));
+		}
     }
 
 	public function index()
@@ -51,9 +55,8 @@ class Pengajuan extends CI_Controller {
   	
   	public function baru()
   	{
-  		
-  		$data['akd_dosens']=$this->dosen_model->get_all();
-
+  		$data['akd_dosens'] = $this->dosen_model->get_all();
+  		$data['pengusul'] = $this->dosen_model->get_pengusul($this->session->userdata('username'));
 
   		return view('pengajuans/baru', $data);
   	}

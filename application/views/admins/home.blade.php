@@ -10,17 +10,16 @@
 
 
 <table id="daftar_pengajuan" class="table table-hover table-striped table-condensed">
-   
   <thead>
       <th>No</th>
       <th class="th-sm">
-        <a href="?sort=name">Nama Pengusul</a>
+        <a href="{{site_url('admin?' . http_build_query(array_merge($params, ['sort' => 'name'])))}}">Nama Pengusul</a>
       </th>
       <th class="th-sm">
-        <a href="?sort=judul">Judul</a>
+        <a href="{{site_url('admin?' . http_build_query(array_merge($params, ['sort' => 'judul'])))}}">Judul</a>
       </th>
       <th class="th-sm">
-        <a href="?sort=tujuan">Tujuan</a>
+        <a href="{{site_url('admin?' . http_build_query(array_merge($params, ['sort' => 'tujuan'])))}}">Tujuan</a>
         </th>
       <th>Aksi</th>
   </thead>

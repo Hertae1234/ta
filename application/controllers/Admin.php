@@ -17,24 +17,21 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		parse_str($_SERVER['QUERY_STRING'], $params);
 
         if ($_SESSION['is_admin'] == '0') {
         	return redirect()->back();
         }
 		$this->load->helper('url');
 		$this->load->library('javascript');
-		if (!isset($_GET['sort'])) {
-		
-			$pengajuan=$this->pengajuan_model->get_all_detail();
-			$data['pengajuan']=$pengajuan;
-		} 
+		$status = isset($_GET['status'])? $_GET['status']: '';
+		$sort = isset($_GET['sort'])? $_GET['sort']: '';
+		$search = isset($_GET['search'])? $_GET['search']: '';
 
-		else {
-			$order = $_GET['sort'];
-			$pengajuan=$this->pengajuan_model->order_by($order);
-			$data['pengajuan']=$pengajuan;
-
-		}
+		$data = [
+			'pengajuan' => $this->pengajuan_model->get_custom($status, $sort, $search),
+			'params' => $params
+		];
 
 		return view('admins/home', $data);
 

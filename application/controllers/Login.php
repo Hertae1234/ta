@@ -39,6 +39,7 @@ class Login extends CI_Controller{
 			$data_session = array(
 				'username' => $username,
 				'is_admin' => $cek['role_id'], 
+				'fullname' => $cek['fullname'],
 				'status' => "login"
 				);
 
@@ -51,7 +52,12 @@ class Login extends CI_Controller{
 			return redirect(base_url("pengusul/index"));
 
 		}
-			echo "Username dan password salah !";
+
+		echo "<script>
+				alert('Username atau Password Salah');
+				window.location.href='".base_url('login')."';	
+				</script>"		;
+
 	}
 
 	function logout(){
@@ -71,12 +77,12 @@ class Login extends CI_Controller{
 		$password2 = $this->input->post('password2');
 
 		//cek konfirmasi pasword
-		
 		if($password != $password2){
-			echo "<script>
-					alert('konfirmasi password tidak sesuai')
-					</script>"		;
-			return false;
+
+		echo "<script>
+				alert('konfirmasi password tidak sesuai');
+				window.location.href='".base_url('login/sign_up')."';	
+				</script>"		;
 		}
 
 		//cek apakah user sudah terdaftar sebelumnya
@@ -87,9 +93,9 @@ class Login extends CI_Controller{
 		
 		if(!empty($cek_user)) {
 			echo "<script>
-					alert('user sudah terdaftar, silahkan Login')
-					</script>";
-			return false;
+					alert('user sudah terdaftar, silahkan login');
+				window.location.href='".base_url('login')."';	
+				</script>"		; // kalau tidak ada return false, data tetap terkirim, jadi akun, masuk ke sistem
 		}
 
 		//cek apakah nidn ditemukan di database dosen
@@ -105,7 +111,8 @@ class Login extends CI_Controller{
 			return false;
 		}
 
-		//jika ada nidn benar, buat akun dan set session
+		//jika ada nidn & benar, buat akun dan set session
+		if (empty($cek_user) && !empty($cek_dosen)) {
 		$this->Login_model->create_user([
 			'username' => $username,
 			'fullname' => $cek_dosen['name'],
@@ -123,5 +130,6 @@ class Login extends CI_Controller{
 		$this->session->set_userdata($data_session);
 	
 		return redirect(base_url('pengusul/index'));
+		}
 	}
 }
